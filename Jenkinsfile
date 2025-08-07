@@ -27,8 +27,6 @@ pipeline {
                     ls -la
                 '''
             }
-
-
         }
 
         stage('Run Tests') {
