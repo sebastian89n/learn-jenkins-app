@@ -105,8 +105,13 @@ pipeline {
                     echo "Deploying to staging. Site ID: $NETLIFY_SITE_ID"
                     node_modules/.bin/netlify deploy --dir=build --no-build
                 """
-                timeout(time: 1, unit: 'HOURS') {
-                    input message: 'Ready to deploy to prod?', ok: 'Yes, I am sure I want to deploy to prod'
+            }
+        }
+
+        stage('Approval') {
+            steps {
+                timeout(time: 15, unit: 'MINUTES') {
+                    input message: 'Do you want to deploy to prod?', ok: 'Yes, I am sure I want to deploy to prod'
                 }
             }
         }
